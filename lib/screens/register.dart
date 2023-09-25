@@ -30,7 +30,8 @@ class RegisterScreen extends StatelessWidget {
               children: [
                 Padding(
                     padding: EdgeInsets.only(top: 0.0, bottom: 30.0),
-                    child: Image.asset("assets/images/logo-poliwangi.png")),
+                    child: Image.asset(
+                        "assets/images/Logo-1-removebg-preview.png")),
                 SizedBox(height: 20.0),
                 TextFormField(
                   controller: nameController,
