@@ -12,6 +12,7 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController mobileController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   String fomatedMobile = '';
   final String errorMessage = 'ths is error';
 
@@ -28,22 +29,17 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                    padding: EdgeInsets.only(top: 0.0, bottom: 30.0),
-                    child: Image.asset("assets/images/logo.jpg")),
-                IntlPhoneField(
+                  padding: EdgeInsets.only(top: 0.0, bottom: 30.0),
+                  child: Image.asset("assets/images/logo-poliwangi.png"),
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(
-                    labelText: 'Phone Number',
-                    contentPadding: EdgeInsets.all(10),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
+                    labelText: 'Name',
+                    prefixIcon: Icon(Icons.person),
+                    border: OutlineInputBorder(),
                   ),
-                  initialCountryCode: 'BD',
-                  controller: mobileController,
-                  onChanged: (phone) {
-                    fomatedMobile = phone.completeNumber;
-                    print(phone.completeNumber);
-                  },
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
@@ -66,11 +62,10 @@ class LoginScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent)
-                    ),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.redAccent)),
                     onPressed: () async {
-                      final response = await http.post(
-                          Uri.parse('some'),
+                      final response = await http.post(Uri.parse('some'),
                           headers: {
                             'Content-Type': 'application/json; charset=UTF-8',
                           },
@@ -79,7 +74,6 @@ class LoginScreen extends StatelessWidget {
                             'password': passwordController.text,
                           }));
                       print('ok');
-
                     },
                     child: Text('Login'),
                   ),
@@ -89,16 +83,20 @@ class LoginScreen extends StatelessWidget {
                   padding: EdgeInsets.all(20),
                   child: Row(
                     children: [
-                      Text("Create a new account ?", style: TextStyle(color: Colors.black),),
+                      Text(
+                        "Create a new account ?",
+                        style: TextStyle(color: Colors.black),
+                      ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RegisterScreen.routeName);
+                          Navigator.pushNamed(
+                              context, RegisterScreen.routeName);
                           // Get.to(RegisterScreen());
                         },
                         child: Text(
                           'Register Now !',
                           style: TextStyle(
-                            color:Colors.redAccent,
+                            color: Colors.redAccent,
                             fontWeight: FontWeight.w900,
                           ),
                         ),

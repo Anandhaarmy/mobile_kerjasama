@@ -16,7 +16,6 @@ class RegisterScreen extends StatelessWidget {
 
   String fomatedMobile = '';
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,22 +30,7 @@ class RegisterScreen extends StatelessWidget {
               children: [
                 Padding(
                     padding: EdgeInsets.only(top: 0.0, bottom: 30.0),
-                    child: Image.asset("assets/images/logo.jpg")),
-
-                IntlPhoneField(
-                  decoration: InputDecoration(
-                    labelText: 'Phone Number',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
-                  ),
-                  initialCountryCode: 'BD',
-                  controller: mobileController,
-                  onChanged: (phone) {
-                    fomatedMobile=phone.completeNumber;
-                    print(phone.completeNumber);
-                  },
-                ),
+                    child: Image.asset("assets/images/logo-poliwangi.png")),
                 SizedBox(height: 20.0),
                 TextFormField(
                   controller: nameController,
@@ -83,15 +67,16 @@ class RegisterScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
-                    ),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         try {
                           final response = await http.post(
                               Uri.parse('https://porartable.com/api/register'),
                               headers: {
-                                'Content-Type': 'application/json; charset=UTF-8',
+                                'Content-Type':
+                                    'application/json; charset=UTF-8',
                               },
                               body: jsonEncode({
                                 'mobile': fomatedMobile,
